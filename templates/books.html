@@ -1,0 +1,32 @@
+{% extends "index.html"%}
+
+{% block content%}
+<table class="table table-striped">
+  <thead>
+    <tr> 
+      <th>Author</th>
+      <th>Country</th>
+      <th>Language</th>
+      <th>Pages</th>
+      <th>Title</th>
+      <th>Price</th>
+    
+    </tr>
+  </thead>
+      
+        {% for book in books %} 
+            <tr>        
+                <td>{{book['author']}}</td>
+                <td>{{book['country']}}</td>
+                <td>{{book['language']}}</td>
+                <td>{{book['pages']}}</td>
+                <td>{{book['title']}}</td>
+                <td>{{book['price']}}</td>
+                <td>
+                  <a href="http://localhost:5000/buybook?bookId={{book['id']}}">Buy</a>
+                </td>
+            </tr>	
+        {%endfor%}    
+    </table>
+{% endblock %}
+    

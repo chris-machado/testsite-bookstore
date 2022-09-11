@@ -1,0 +1,32 @@
+{% extends "index.html"%}
+
+{% block content %}
+<h2>Shopping Cart</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Author</th>
+            <th scope="col">Country</th>
+            <th scope="col">Language</th>
+            <th scope="col">Pages</th>
+            <th scope="col">Title</th>
+            <th scope="col">Year</th>
+            <th scope="col">Price</th>
+            </tr>
+        </thead>
+        {% for book in booksToPurchase %} 
+            <tr>
+              <td>{{book['author']}}</td>
+              <td>{{book['country']}}</td>	
+              <td>{{book['language']}}</td>	
+              <td>{{book['pages']}}</td>
+              <td>{{book['title']}}</td>
+              <td>{{book['year']}}</td>	
+              <td>{{book['price']}}</td>	
+            </<tr>	
+        {%endfor%}
+    </table>
+    <div>
+        <p>Total Due: {{totalDue}}</p>
+    </div>
+{% endblock %}
