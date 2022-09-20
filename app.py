@@ -3,9 +3,29 @@ from flask import Flask, request, render_template, session, make_response
 from flask import redirect
 from functools import wraps
 import os
+
+from flask_restful import Resource, Api
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import jwt_required, verify_jwt_in_request
+from flask_jwt_extended import JWTManager, get_jwt_identity, get_jwt
+from flask_jwt_extended import set_access_cookies
+
+app = Flask(__name__)
+app.config["JWT_SECRET_KEY"] = "secretkey"
+app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
+app.config["JWT_COOKIE_SECURE"] = False
+jwt = JWTManager(app)
+jwt.init_app(app)
 app = Flask(__name__)
 app.secret_key = "secretkey"
 app.config["UPLOADED_PHOTOS_DEST"] = "static"
+app.config["JWT_SECRET_KEY"] = "secretkey"
+app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
+app.config["JWT_COOKIE_SECURE"] = False
+app.config["JWT_COOKIE_CSRF_PROTECT"] = False
+
+jwt = JWTManager(app)
+jwt.init_app(app)
 
 books = [
     {
