@@ -90,7 +90,12 @@ books = [
     },
 ]
 
-users = [{"username": "testuser", "password": "testuser"}]
+users = [{"username": "testuser", "password": "testuser"}
+    {"username": "John", "password": "John", "role": "reader"},
+    {"username": "Anne", "password": "Anne", "role": "admin"},
+    {"username": "Chris", "password": "Chris", "role": "admin"},
+    {"username": "Holly", "password": "Holly", "role": "reader"}
+    ]
 
 
 def loginrequired(fn):
@@ -104,15 +109,27 @@ def loginrequired(fn):
                 return fn(*args, **kwargs)
         # otherwise send user to register
         return redirect("static/register.html")
-
     return decorator
+
+def admin_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        verify_jwt_in_request()
+        claims = get_jwt()
+        print(claims)
+        if claims['fresh']['role'] != 'admin':
+            return jsonify(msg='admins only'), 403
+
+        else:    
+            return fn(*args, **kwargs)
+    return wrapper
 
 
 def checkUser(username, password):
     for user in users:
         if username in user["username"] and password in user["password"]:
-            return True
-    return False
+            return {"username": user["username"], "role": user["role"]}
+    return None
 
 
 @app.route("/", methods=["GET"])
