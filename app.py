@@ -90,7 +90,7 @@ books = [
     },
 ]
 
-users = [{"username": "testuser", "password": "testuser"}
+users = [{"username": "testuser", "password": "testuser"},
     {"username": "John", "password": "John", "role": "reader"},
     {"username": "Anne", "password": "Anne", "role": "admin"},
     {"username": "Chris", "password": "Chris", "role": "admin"},
@@ -142,16 +142,26 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        if checkUser(username, password):
-            # set session token to users name
-            session["username"] = username
-            return render_template(
-                "index.html", username=session["username"]
+        validUser = checkUser(username, password)
+        if validUser != None:
+            # set JWT token
+
+            user_claims = {"role": validUser["role"]}
+            access_token = create_access_token(
+                username, user_claims)
+
+            response = make_response(
+                render_template(
+                    "index.html", title="books", username=username, role=validUser["role"], books=books
+                )
             )
-        else:
-            return render_template("register.html")
-    elif request.method == "GET":
-        return render_template("register.html")
+            response.status_code = 200
+            # add jwt-token to response headers
+            # response.headers.extend({"jwt-token": access_token})
+            set_access_cookies(response, access_token)
+            return response
+
+    return render_template("register.html")
 
 
 @app.route("/logout")
