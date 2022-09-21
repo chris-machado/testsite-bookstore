@@ -187,14 +187,27 @@ def getBooks():
 @app.route("/addbook", methods=["GET", "POST"])
 @jwt_required()
 def addBook():
-    username = session["username"]
+    username = get_jwt_identity()
     if request.method == "GET":
         return render_template("addBook.html")
     if request.method == "POST":
         # expects pure json with quotes everywheree
         author = request.form.get("author")
+        country = request.form.get("country")
+        language = request.form.get("language")
+        pages = request.form.get("pages")
+        
         title = request.form.get("title")
-        newbook = {"author": author, "title": title}
+        price = request.form.get("price")
+
+        newbook = {
+            "author": author, 
+            "country": country,
+            "language": language,
+            "pages": pages,
+            "title": title,
+            "price": price
+            }
         books.append(newbook)
         return render_template(
             "books.html", books=books, username=username, title="books"
