@@ -172,10 +172,8 @@ def logout():
 
 
 @app.route("/books", methods=["GET"])
+@jwt_required()
 def getBooks():
-    # Exercise = Use a try block on the /books route.
-    # If the session exists then render the books.html
-    # If it doesn't send the user to register.html
     try:
         username = get_jwt_identity()
         return render_template('books.html', username=user, books=books)
