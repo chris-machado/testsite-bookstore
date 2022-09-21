@@ -177,7 +177,7 @@ def getBooks():
     # If the session exists then render the books.html
     # If it doesn't send the user to register.html
     try:
-        user = session["username"]
+        username = get_jwt_identity()
         return render_template('books.html', username=user, books=books)
     except:
         return render_template("register.html")
