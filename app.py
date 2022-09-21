@@ -185,7 +185,7 @@ def getBooks():
 
 
 @app.route("/addbook", methods=["GET", "POST"])
-@loginrequired
+@jwt_required()
 def addBook():
     username = session["username"]
     if request.method == "GET":
@@ -204,7 +204,7 @@ def addBook():
 
 
 @app.route("/addimage", methods=["GET", "POST"])
-@loginrequired
+@jwt_required()
 def addimage():
     if request.method == "GET":
         return render_template("addimage.html")
@@ -219,10 +219,11 @@ def addimage():
     return "all done"
 
 @app.route("/buybook")
+@jwt_required()
 def buybook():
     # get the book id parameter passed in the URL:
 
-    user = session["username"]
+    username = get_jwt_identity()
 
     #add Cookie  booksToPurchase here
 
@@ -252,7 +253,7 @@ def buybook():
     booksCookie =",".join(booksToPurchaseIDs)
  
     ## set the cookie -  add code here
-    response = make_response(render_template("buybook.html", username = user, booksToPurchase=booksToPurchase))
+    response = make_response(render_template("buybook.html", username = username, booksToPurchase=booksToPurchase))
     response.set_cookie("booksToPurchase", booksCookie)
 
     return response;
