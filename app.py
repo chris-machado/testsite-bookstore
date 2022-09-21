@@ -27,6 +27,8 @@ app.config["JWT_COOKIE_CSRF_PROTECT"] = False
 jwt = JWTManager(app)
 jwt.init_app(app)
 
+port = 443
+
 books = [
     {
         "id": 1,
@@ -176,7 +178,8 @@ def logout():
 def getBooks():
     try:
         username = get_jwt_identity()
-        return render_template('books.html', username=user, books=books)
+        print(username)
+        return render_template('books.html', username=username, books=books, port=port)
     except:
         return render_template("register.html")
 
@@ -256,4 +259,4 @@ def buybook():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=443)
+    app.run(debug=True, host="0.0.0.0", port=port)

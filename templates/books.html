@@ -23,7 +23,7 @@
                 <td>{{book['title']}}</td>
                 <td>{{book['price']}}</td>
                 <td>
-                  <a href="http://localhost:5000/buybook?bookId={{book['id']}}">Buy</a>
+                  <a href="http://localhost:{{port}}/buybook?bookId={{book['id']}}">Buy</a>
                 </td>
             </tr>	
         {%endfor%}    
