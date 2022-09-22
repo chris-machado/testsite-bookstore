@@ -3,6 +3,7 @@ from flask import Flask, request, render_template, session, make_response
 from flask import redirect, jsonify
 from functools import wraps
 import os
+import sys
 
 from flask_restful import Resource, Api
 from flask_jwt_extended import create_access_token
@@ -273,6 +274,9 @@ def buybook():
 
     return response;
 
+#####################################################
+cmd = 'docker start my_redis'
+os.system(cmd)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=port)
