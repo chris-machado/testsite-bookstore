@@ -1,6 +1,6 @@
 from urllib import response
 from flask import Flask, request, render_template, session, make_response
-from flask import redirect
+from flask import redirect, jsonify
 from functools import wraps
 import os
 
@@ -186,6 +186,7 @@ def getBooks():
 
 @app.route("/addbook", methods=["GET", "POST"])
 @jwt_required()
+@admin_required
 def addBook():
     username = get_jwt_identity()
     if request.method == "GET":
@@ -218,6 +219,7 @@ def addBook():
 
 @app.route("/addimage", methods=["GET", "POST"])
 @jwt_required()
+@admin_required
 def addimage():
     if request.method == "GET":
         return render_template("addimage.html")
