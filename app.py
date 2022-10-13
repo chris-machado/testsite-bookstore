@@ -12,12 +12,6 @@ from flask_jwt_extended import JWTManager, get_jwt_identity, get_jwt
 from flask_jwt_extended import set_access_cookies
 
 app = Flask(__name__)
-app.config["JWT_SECRET_KEY"] = "secretkey"
-app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
-app.config["JWT_COOKIE_SECURE"] = False
-jwt = JWTManager(app)
-jwt.init_app(app)
-app = Flask(__name__)
 app.secret_key = "secretkey"
 app.config["UPLOADED_PHOTOS_DEST"] = "static"
 app.config["JWT_SECRET_KEY"] = "secretkey"
