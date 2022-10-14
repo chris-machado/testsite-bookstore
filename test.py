@@ -9,3 +9,4 @@ b=3
 if b==3:
     c=3
 test = 64.5
+print('yay')
