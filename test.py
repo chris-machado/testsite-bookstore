@@ -12,3 +12,4 @@ test = 64.5
 print('yay')
 print('6')
 happy = 'g'
+bbb=222
