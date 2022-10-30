@@ -7,3 +7,5 @@ x = np.vstack((myones, x))
 y = np.dot(w,x)
 print(f'x = {x}')
 print(f'y = {y}')
+
+
