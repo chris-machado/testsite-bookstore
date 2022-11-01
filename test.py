@@ -19,3 +19,5 @@ c = 2.71
 e = 2.71
 pi = 3.14
 variable=hhhaa
+
+p(A|B) = 
