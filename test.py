@@ -20,4 +20,6 @@ e = 2.71
 pi = 3.14
 variable=hhhaa
 
+
+test_variable = "string"
 p(A|B) = P(B)))
