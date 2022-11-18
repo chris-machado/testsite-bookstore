@@ -22,7 +22,6 @@ variable=hhhaa
 
 
 test_variable = "string"
-p(A|B) = P(B)))
 donner = 2.3
 pi = 2
 jdjd=23
