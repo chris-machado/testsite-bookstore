@@ -22,6 +22,9 @@ variable=hhhaa
 
 
 test_variable = "string"
+
+y=3
+z=y
 donner = 2.3
 pi = 2
 jdjd=23
